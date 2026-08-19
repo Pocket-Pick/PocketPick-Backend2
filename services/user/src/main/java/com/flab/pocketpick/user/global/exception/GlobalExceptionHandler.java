@@ -1,5 +1,6 @@
 package com.flab.pocketpick.user.global.exception;
 
+import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +52,20 @@ public class GlobalExceptionHandler {
         log.warn("[GlobalExceptionHandler] HttpMediaTypeNotSupportedException: {}", e.getMessage());
         return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
                 .body(new ErrorResponse("지원하지 않는 Content-Type입니다."));
+    }
+
+    @ExceptionHandler(GrpcClientException.class)
+    public ResponseEntity<ErrorResponse> handleGrpcClientException(GrpcClientException e) {
+        log.warn("[GlobalExceptionHandler] GrpcClientException: code={}, message={}", e.getCode(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+                .body(new ErrorResponse("외부 서비스 호출에 실패했습니다."));
+    }
+
+    @ExceptionHandler(CallNotPermittedException.class)
+    public ResponseEntity<ErrorResponse> handleCallNotPermitted(CallNotPermittedException e) {
+        log.warn("[GlobalExceptionHandler] CallNotPermittedException: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(new ErrorResponse("일시적으로 사용할 수 없는 서비스입니다. 잠시 후 다시 시도해주세요."));
     }
 
     @ExceptionHandler(Exception.class)
