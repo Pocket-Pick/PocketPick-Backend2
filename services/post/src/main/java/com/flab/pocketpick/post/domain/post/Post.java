@@ -53,6 +53,10 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "post_id")
     private List<PostImage> images;
 
+    public void updateViewCount(Long viewCount) {
+        this.viewCount = viewCount;
+    }
+
     @Builder
     public Post(Long sellerId, String title, String description, Long price, TradeOption tradeOption, PostStatus status, List<PostCard> cards, List<PostImage> images) {
         this.sellerId = sellerId;
