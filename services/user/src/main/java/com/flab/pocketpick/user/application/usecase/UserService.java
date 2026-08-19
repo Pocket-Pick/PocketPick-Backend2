@@ -27,6 +27,11 @@ public class UserService implements UserUseCase {
 
         authGrpcClient.createCredential(request.email(), request.password());
 
-        userPersistenceService.save(request);
+        try {
+            userPersistenceService.save(request);
+        } catch (Exception e) {
+            authGrpcClient.deleteCredential(request.email());
+            throw e;
+        }
     }
 }
