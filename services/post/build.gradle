@@ -9,6 +9,8 @@ dependencies {
     implementation libs.spring.boot.starter.security
     implementation libs.spring.boot.starter.validation
     implementation libs.spring.boot.starter.actuator
+    implementation libs.spring.boot.starter.redis
+    implementation libs.spring.boot.starter.cache
     implementation libs.spring.boot.starter.grpc.server
     implementation libs.spring.boot.starter.grpc.client
     developmentOnly libs.spring.boot.devtools
