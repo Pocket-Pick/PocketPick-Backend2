@@ -8,6 +8,8 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: false
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
   grpc:
     client:
       channels:
@@ -17,3 +19,6 @@ spring:
 order:
   policy:
     delivery-fee: 3000
+
+kafka:
+  schema-registry-url: ${SCHEMA_REGISTRY_URL}

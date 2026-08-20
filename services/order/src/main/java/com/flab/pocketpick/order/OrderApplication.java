@@ -1,12 +1,11 @@
 package com.flab.pocketpick.order;
 
-import com.flab.pocketpick.order.global.properties.OrderPolicyProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
-@EnableConfigurationProperties(OrderPolicyProperties.class)
+@ConfigurationPropertiesScan
 public class OrderApplication {
 
     public static void main(String[] args) {

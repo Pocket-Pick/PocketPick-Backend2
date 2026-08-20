@@ -20,6 +20,7 @@ lombok = { module = "org.projectlombok:lombok" }
 mysql-connector = { module = "com.mysql:mysql-connector-j" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+spring-boot-starter-kafka = { module = "org.springframework.boot:spring-boot-starter-kafka" }
 avro = { module = "org.apache.avro:avro", version.ref = "avro" }
 kafka-avro-serializer = { module = "io.confluent:kafka-avro-serializer", version.ref = "kafka-avro-serializer" }
 

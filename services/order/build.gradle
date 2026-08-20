@@ -17,6 +17,7 @@ dependencies {
     implementation libs.spring.boot.starter.grpc.server
     implementation libs.spring.boot.starter.grpc.client
     implementation libs.spring.cloud.circuitbreaker.resilience4j
+    implementation libs.spring.boot.starter.kafka
     implementation libs.avro
     implementation libs.kafka.avro.serializer
     developmentOnly libs.spring.boot.devtools
