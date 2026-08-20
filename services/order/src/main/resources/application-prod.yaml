@@ -13,3 +13,7 @@ spring:
       channels:
         post-service:
           address: static://${POST_GRPC_HOST}:${POST_GRPC_PORT}
+
+order:
+  policy:
+    delivery-fee: 3000

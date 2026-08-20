@@ -3,6 +3,7 @@ package com.flab.pocketpick.order.domain.order.vo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,6 +29,7 @@ public class ShippingAddress {
 
     private String deliveryRequest;
 
+    @Builder
     public ShippingAddress(String zipCode, String roadAddress, String detailAddress,
                            String receiverName, String receiverPhone, String deliveryRequest) {
         this.zipCode = zipCode;

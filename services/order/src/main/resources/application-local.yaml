@@ -14,3 +14,6 @@ spring:
         post-service:
           address: static://${POST_GRPC_HOST:localhost}:${POST_GRPC_PORT:9090}
 
+order:
+  policy:
+    delivery-fee: 3000
