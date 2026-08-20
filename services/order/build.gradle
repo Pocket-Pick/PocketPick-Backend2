@@ -1,0 +1,17 @@
+plugins {
+    id 'pocketpick.spring-conventions'
+    id 'com.google.protobuf'
+}
+
+dependencies {
+    implementation libs.spring.boot.starter.web
+    implementation libs.spring.boot.starter.jpa
+    implementation libs.spring.boot.starter.security
+    implementation libs.spring.boot.starter.validation
+    implementation libs.spring.boot.starter.actuator
+    implementation libs.spring.boot.starter.grpc.server
+    implementation libs.spring.boot.starter.grpc.client
+    developmentOnly libs.spring.boot.devtools
+    runtimeOnly libs.mysql.connector
+    testImplementation libs.spring.boot.starter.test
+}
