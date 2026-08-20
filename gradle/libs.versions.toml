@@ -2,6 +2,7 @@
 spring-boot = "4.1.0"
 spring-dependency-management = "1.1.7"
 protobuf-plugin = "0.9.6"
+spring-cloud = "2025.1.2"
 
 [libraries]
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-webmvc" }
@@ -11,6 +12,7 @@ spring-boot-starter-validation = { module = "org.springframework.boot:spring-boo
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 spring-boot-starter-grpc-server = { module = "org.springframework.boot:spring-boot-starter-grpc-server" }
 spring-boot-starter-grpc-client = { module = "org.springframework.boot:spring-boot-starter-grpc-client" }
+spring-cloud-circuitbreaker-resilience4j = { module = "org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j" }
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
 lombok = { module = "org.projectlombok:lombok" }
 mysql-connector = { module = "com.mysql:mysql-connector-j" }

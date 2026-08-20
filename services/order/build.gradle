@@ -11,6 +11,7 @@ dependencies {
     implementation libs.spring.boot.starter.actuator
     implementation libs.spring.boot.starter.grpc.server
     implementation libs.spring.boot.starter.grpc.client
+    implementation libs.spring.cloud.circuitbreaker.resilience4j
     developmentOnly libs.spring.boot.devtools
     runtimeOnly libs.mysql.connector
     testImplementation libs.spring.boot.starter.test

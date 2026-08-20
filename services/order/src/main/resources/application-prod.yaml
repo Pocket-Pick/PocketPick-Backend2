@@ -8,3 +8,8 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: false
+  grpc:
+    client:
+      channels:
+        post-service:
+          address: static://${POST_GRPC_HOST}:${POST_GRPC_PORT}
