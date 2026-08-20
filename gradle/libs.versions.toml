@@ -3,6 +3,8 @@ spring-boot = "4.1.0"
 spring-dependency-management = "1.1.7"
 protobuf-plugin = "0.9.6"
 spring-cloud = "2025.1.2"
+avro = "1.12.0"
+kafka-avro-serializer = "7.9.0"
 
 [libraries]
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-webmvc" }
@@ -18,6 +20,8 @@ lombok = { module = "org.projectlombok:lombok" }
 mysql-connector = { module = "com.mysql:mysql-connector-j" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+avro = { module = "org.apache.avro:avro", version.ref = "avro" }
+kafka-avro-serializer = { module = "io.confluent:kafka-avro-serializer", version.ref = "kafka-avro-serializer" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }

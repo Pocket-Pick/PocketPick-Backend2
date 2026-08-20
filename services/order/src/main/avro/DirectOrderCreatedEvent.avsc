@@ -1,0 +1,22 @@
+{
+  "namespace": "com.flab.pocketpick.order.avro",
+  "type": "record",
+  "name": "DirectOrderCreatedEvent",
+  "fields": [
+    {"name": "orderId", "type": "long"},
+    {"name": "customerId", "type": "long"},
+    {"name": "sellerId", "type": "long"},
+    {"name": "postId", "type": "long"},
+    {"name": "itemPrice", "type": "long"},
+    {"name": "meetingLocation", "type": {
+      "type": "record",
+      "name": "MeetingLocation",
+      "fields": [
+        {"name": "zipCode", "type": "string"},
+        {"name": "roadAddress", "type": "string"},
+        {"name": "detailAddress", "type": "string"}
+      ]
+    }},
+    {"name": "meetingAt", "type": "string"}
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "namespace": "com.flab.pocketpick.order.avro",
+  "type": "record",
+  "name": "OnlineOrderCreatedEvent",
+  "fields": [
+    {"name": "orderId", "type": "long"},
+    {"name": "customerId", "type": "long"},
+    {"name": "sellerId", "type": "long"},
+    {"name": "postId", "type": "long"},
+    {"name": "price", "type": {
+      "type": "record",
+      "name": "OnlineOrderPrice",
+      "fields": [
+        {"name": "itemPrice", "type": "long"},
+        {"name": "deliveryFee", "type": "long"},
+        {"name": "totalPrice", "type": "long"}
+      ]
+    }},
+    {"name": "shippingAddress", "type": {
+      "type": "record",
+      "name": "ShippingAddress",
+      "fields": [
+        {"name": "zipCode", "type": "string"},
+        {"name": "roadAddress", "type": "string"},
+        {"name": "detailAddress", "type": "string"},
+        {"name": "receiverName", "type": "string"},
+        {"name": "receiverPhone", "type": "string"},
+        {"name": "deliveryRequest", "type": ["null", "string"], "default": null}
+      ]
+    }}
+  ]
+}
