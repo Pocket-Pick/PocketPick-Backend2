@@ -10,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -24,7 +25,9 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "outbox_events")
+@Table(name = "outbox_events", indexes = {
+        @Index(name = "idx_outbox_aggregate_seq", columnList = "aggregateId, sequenceNumber")
+})
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
@@ -50,6 +53,9 @@ public class OutboxEvent {
     private OutboxStatus status;
 
     @Column(nullable = false)
+    private int sequenceNumber;
+
+    @Column(nullable = false)
     private int retryCount;
 
     @Column
@@ -63,11 +69,12 @@ public class OutboxEvent {
     private LocalDateTime createdAt;
 
     @Builder
-    private OutboxEvent(Long aggregateId, OutboxEventType eventType, byte[] payload) {
+    private OutboxEvent(Long aggregateId, OutboxEventType eventType, byte[] payload, int sequenceNumber) {
         this.aggregateId = aggregateId;
         this.eventType = eventType;
         this.payload = payload;
         this.status = OutboxStatus.PENDING;
+        this.sequenceNumber = sequenceNumber;
         this.retryCount = 0;
     }
 

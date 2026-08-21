@@ -1,11 +1,11 @@
 package com.flab.pocketpick.order.infra.relay;
 
 import com.flab.pocketpick.order.domain.order.entity.OutboxEvent;
-import com.flab.pocketpick.order.domain.order.enums.OutboxStatus;
 import com.flab.pocketpick.order.infra.kafka.OrderEventProducer;
 import com.flab.pocketpick.order.infra.persistence.OutboxEventRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import com.flab.pocketpick.order.domain.order.enums.OutboxStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +22,9 @@ public class MessageRelayService {
 
     @Scheduled(fixedDelay = 500)
     public void relay() {
-        List<OutboxEvent> events = outboxEventRepository.findByStatusIn(
-                List.of(OutboxStatus.PENDING, OutboxStatus.FAILED)
+        List<OutboxEvent> events = outboxEventRepository.findPublishableEvents(
+                List.of(OutboxStatus.PENDING, OutboxStatus.FAILED),
+                List.of(OutboxStatus.PUBLISHED, OutboxStatus.DEAD_LETTERED)
         );
 
         for (OutboxEvent event : events) {

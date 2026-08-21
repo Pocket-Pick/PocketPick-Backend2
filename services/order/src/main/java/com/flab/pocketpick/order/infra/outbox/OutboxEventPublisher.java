@@ -9,10 +9,15 @@ import com.flab.pocketpick.order.domain.order.DirectOrder;
 import com.flab.pocketpick.order.domain.order.OnlineOrder;
 import com.flab.pocketpick.order.domain.order.entity.OutboxEvent;
 import com.flab.pocketpick.order.domain.order.enums.OutboxEventType;
+import com.flab.pocketpick.order.infra.persistence.OutboxEventRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class OutboxEventPublisher {
+
+    private final OutboxEventRepository outboxEventRepository;
 
     public OutboxEvent createOnlineOrderCreatedEvent(OnlineOrder order) {
         OnlineOrderCreatedEvent avroEvent = OnlineOrderCreatedEvent.newBuilder()
@@ -38,6 +43,7 @@ public class OutboxEventPublisher {
         return OutboxEvent.builder()
                 .aggregateId(order.getId())
                 .eventType(OutboxEventType.ONLINE_ORDER_CREATED)
+                .sequenceNumber(outboxEventRepository.nextSequenceNumber(order.getId()))
                 .payload(AvroSerializer.serialize(avroEvent, OnlineOrderCreatedEvent.getEncoder()::encode))
                 .build();
     }
@@ -60,6 +66,7 @@ public class OutboxEventPublisher {
         return OutboxEvent.builder()
                 .aggregateId(order.getId())
                 .eventType(OutboxEventType.DIRECT_ORDER_CREATED)
+                .sequenceNumber(outboxEventRepository.nextSequenceNumber(order.getId()))
                 .payload(AvroSerializer.serialize(avroEvent, DirectOrderCreatedEvent.getEncoder()::encode))
                 .build();
     }

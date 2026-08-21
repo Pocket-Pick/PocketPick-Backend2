@@ -16,8 +16,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class OrderEventProducer {
 
-    private static final String ONLINE_ORDER_CREATED_TOPIC = "online-order-created";
-    private static final String DIRECT_ORDER_CREATED_TOPIC = "direct-order-created";
+    private static final String ONLINE_ORDER_EVENTS_TOPIC = "online-order-events";
+    private static final String DIRECT_ORDER_EVENTS_TOPIC = "direct-order-events";
 
     private final KafkaTemplate<String, GenericRecord> avroKafkaTemplate;
 
@@ -29,8 +29,8 @@ public class OrderEventProducer {
 
     private String resolveTopic(OutboxEventType eventType) {
         return switch (eventType) {
-            case ONLINE_ORDER_CREATED -> ONLINE_ORDER_CREATED_TOPIC;
-            case DIRECT_ORDER_CREATED -> DIRECT_ORDER_CREATED_TOPIC;
+            case ONLINE_ORDER_CREATED -> ONLINE_ORDER_EVENTS_TOPIC;
+            case DIRECT_ORDER_CREATED -> DIRECT_ORDER_EVENTS_TOPIC;
         };
     }
 
