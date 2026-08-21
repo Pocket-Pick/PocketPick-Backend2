@@ -4,7 +4,6 @@
   "name": "CancelOrderCommand",
   "fields": [
     {"name": "sagaId", "type": "string"},
-    {"name": "orderId", "type": "long"},
-    {"name": "reason", "type": "string"}
+    {"name": "orderId", "type": "long"}
   ]
 }
