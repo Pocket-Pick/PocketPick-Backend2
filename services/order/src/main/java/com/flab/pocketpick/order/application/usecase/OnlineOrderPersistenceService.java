@@ -3,11 +3,16 @@ package com.flab.pocketpick.order.application.usecase;
 import com.flab.pocketpick.order.application.dto.CreateOnlineOrderRequest;
 import com.flab.pocketpick.order.application.dto.ShippingAddressRequest;
 import com.flab.pocketpick.order.domain.order.OnlineOrder;
+import com.flab.pocketpick.order.domain.order.entity.OutboxEvent;
+import com.flab.pocketpick.order.domain.order.event.OnlineOrderCreatedEvent;
 import com.flab.pocketpick.order.domain.order.vo.OnlineOrderPrice;
 import com.flab.pocketpick.order.domain.order.vo.ShippingAddress;
 import com.flab.pocketpick.order.global.properties.OrderPolicyProperties;
+import com.flab.pocketpick.order.infra.outbox.OutboxEventPublisher;
 import com.flab.pocketpick.order.infra.persistence.OnlineOrderRepository;
+import com.flab.pocketpick.order.infra.persistence.OutboxEventRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class OnlineOrderPersistenceService {
 
     private final OnlineOrderRepository onlineOrderRepository;
+    private final OutboxEventRepository outboxEventRepository;
+    private final OutboxEventPublisher outboxEventPublisher;
+    private final ApplicationEventPublisher applicationEventPublisher;
     private final OrderPolicyProperties orderPolicyProperties;
 
     @Transactional
@@ -38,5 +46,8 @@ public class OnlineOrderPersistenceService {
                 .build();
 
         onlineOrderRepository.save(order);
+
+        OutboxEvent outboxEvent = outboxEventRepository.save(outboxEventPublisher.createOnlineOrderCreatedEvent(order));
+        applicationEventPublisher.publishEvent(new OnlineOrderCreatedEvent(outboxEvent));
     }
 }

@@ -19,6 +19,7 @@ spring:
 order:
   policy:
     delivery-fee: 3000
+    outbox-max-retry-count: 3
 
 kafka:
   schema-registry-url: ${SCHEMA_REGISTRY_URL}

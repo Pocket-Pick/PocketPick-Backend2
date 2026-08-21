@@ -22,6 +22,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 
+
 @Entity
 @Table(name = "outbox_events")
 @Getter
@@ -51,6 +52,12 @@ public class OutboxEvent {
     @Column(nullable = false)
     private int retryCount;
 
+    @Column
+    private LocalDateTime lastAttemptAt;
+
+    @Column
+    private LocalDateTime publishedAt;
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -62,5 +69,20 @@ public class OutboxEvent {
         this.payload = payload;
         this.status = OutboxStatus.PENDING;
         this.retryCount = 0;
+    }
+
+    public void markPublished() {
+        this.status = OutboxStatus.PUBLISHED;
+        this.publishedAt = LocalDateTime.now();
+    }
+
+    public void markFailed(int maxRetryCount) {
+        this.retryCount++;
+        this.lastAttemptAt = LocalDateTime.now();
+        if (this.retryCount >= maxRetryCount) {
+            this.status = OutboxStatus.DEAD_LETTERED;
+        } else {
+            this.status = OutboxStatus.FAILED;
+        }
     }
 }
