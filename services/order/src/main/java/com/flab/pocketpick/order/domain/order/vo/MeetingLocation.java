@@ -3,6 +3,7 @@ package com.flab.pocketpick.order.domain.order.vo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,7 @@ public class MeetingLocation {
     @Column(nullable = false)
     private String detailAddress;
 
+    @Builder
     public MeetingLocation(String zipCode, String roadAddress, String detailAddress) {
         this.zipCode = zipCode;
         this.roadAddress = roadAddress;

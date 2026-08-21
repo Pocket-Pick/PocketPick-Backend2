@@ -1,0 +1,9 @@
+{
+  "namespace": "com.flab.pocketpick.order.avro",
+  "type": "record",
+  "name": "ConfirmOrderCommand",
+  "fields": [
+    {"name": "sagaId", "type": "string"},
+    {"name": "orderId", "type": "long"}
+  ]
+}

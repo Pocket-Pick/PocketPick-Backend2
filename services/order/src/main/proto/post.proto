@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_package = "com.flab.pocketpick.order.grpc";
+option java_outer_classname = "PostProto";
+option java_multiple_files = true;
+
+service PostService {
+  rpc GetPostPrice(GetPostPriceRequest) returns (GetPostPriceResponse);
+}
+
+message GetPostPriceRequest {
+  int64 post_id = 1;
+}
+
+message GetPostPriceResponse {
+  int64 price = 1;
+}

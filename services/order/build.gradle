@@ -1,6 +1,11 @@
 plugins {
     id 'pocketpick.spring-conventions'
     id 'com.google.protobuf'
+    id 'com.github.davidmc24.gradle.plugin.avro' version '1.9.1'
+}
+
+repositories {
+    maven { url 'https://packages.confluent.io/maven/' }
 }
 
 dependencies {
@@ -11,6 +16,10 @@ dependencies {
     implementation libs.spring.boot.starter.actuator
     implementation libs.spring.boot.starter.grpc.server
     implementation libs.spring.boot.starter.grpc.client
+    implementation libs.spring.cloud.circuitbreaker.resilience4j
+    implementation libs.spring.boot.starter.kafka
+    implementation libs.avro
+    implementation libs.kafka.avro.serializer
     developmentOnly libs.spring.boot.devtools
     runtimeOnly libs.mysql.connector
     testImplementation libs.spring.boot.starter.test

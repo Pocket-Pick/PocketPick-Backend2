@@ -8,3 +8,18 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+  grpc:
+    client:
+      channels:
+        post-service:
+          address: static://${POST_GRPC_HOST:localhost}:${POST_GRPC_PORT:9090}
+
+order:
+  policy:
+    delivery-fee: 3000
+    outbox-max-retry-count: 3
+
+kafka:
+  schema-registry-url: ${SCHEMA_REGISTRY_URL:http://localhost:8081}

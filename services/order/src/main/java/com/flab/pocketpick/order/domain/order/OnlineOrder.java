@@ -49,4 +49,12 @@ public class OnlineOrder extends BaseEntity {
         this.status = OnlineOrderStatus.CREATED;
         this.shippingAddress = shippingAddress;
     }
+
+    public void confirm() {
+        this.status = OnlineOrderStatus.CONFIRMED;
+    }
+
+    public void cancel() {
+        this.status = OnlineOrderStatus.CANCELLED;
+    }
 }
